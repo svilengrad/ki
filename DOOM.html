@@ -1,0 +1,61 @@
+<!DOCTYPE html> 
+    <html>
+            <head><h1 style="color:rgb(255, 255, 255);">Move Stan to kill </h1> </head>
+        <body>
+                <style>
+                        body{background-color: black;}   
+                     body {background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSv0Gy2HuKqLgikci4y8NkfJWQDRURC7ZW58Q&usqp=CAU");}
+                </style>
+              <script src="https://cdn.jsdelivr.net/npm/blocklike@1.0.0/dist/blocklike-1.0.0.min.js"></script>
+                  <script>
+                        let stage = new blockLike.Stage();
+                         let sprite = new blockLike.Sprite();
+                      let costume = new blockLike.Costume({
+                          width: 20,
+                          height: 20,
+                        color: '#A2DAFF',
+                        image: 'https://cpng.pikpng.com/pngl/s/138-1384702_text-box-generator-doom-guy-clipart.png' 
+                            });
+
+                        sprite.addTo(stage);
+
+                           let answer;
+                        sprite.WhenFlag(function({
+                            answer = this.ask('DO yyou WANT to KILLL?!?!?');
+                            this.say('KILL OR BE KILLED +answer ') 
+                        });
+
+                        sprite.whenclicked( function() {
+                            costume.addTo(sprite); 
+                        }); 
+
+                            sprite.whenkeyPressed(39, function() {
+                              this,changeX(100); 
+
+                            });
+
+                          sprite.whenkeyPressed(37, function() {
+                            this,changeX(-100); 
+                          });
+
+                          sprite.whenkeyPressed(38, function() {
+                            this.changeX(100);                          
+                          });
+ 
+                          sprite.whenkeyPressed(40, function() {
+                        });
+                  </script>  
+                        
+                
+
+
+
+
+        </body>
+
+
+
+
+
+
+    </html>
