@@ -2,54 +2,99 @@
 <html>
 
 <head>
+  <title>DOOM</title>
+  <link rel="icon" 
+      type="image/png" 
+      href="Doom-4-1-icon.png">
   <style>
     body {
       background-color: black;
       background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSv0Gy2HuKqLgikci4y8NkfJWQDRURC7ZW58Q&usqp=CAU");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size:1000px;
+      border: 5px solid rgb(255, 0, 0);
+
     }
   </style>
 </head>
 
 <body>
-  <h1 style="color:rgb(255, 255, 255);">Move Stan to kill </h1>
+ 
+  <h1 style="color:rgb(0, 0, 0);">Move Stan to kill </h1>
   <script src="https://cdn.jsdelivr.net/npm/blocklike@1.0.0/dist/blocklike-1.0.0.min.js"></script>
   <script>
     let stage = new blockLike.Stage();
-    let sprite = new blockLike.Sprite();
-    let costume = new blockLike.Costume({
-      width: 20,
-      height: 20,
-      color: '#A2DAFF',
-      image: 'https://cpng.pikpng.com/pngl/s/138-1384702_text-box-generator-doom-guy-clipart.png'
+    let sprite = new blockLike.Sprite({
+      width: 100,
+      height: 100,
+      color: 'black',
+      image:'doomguy side view.jpg'
     });
+    
 
     sprite.addTo(stage);
+    sprite.setRotationStyle('left-right'); 
+    sprite.pointInDirection(-90)
+    
 
     let answer;
     sprite.whenFlag(function () {
       answer = this.ask('DO yyou WANT to KILLL?!?!?');
-      this.say('KILL OR BE KILLED ' + answer)
+      this.say('Then KILL OR BE KILLED ' + answer)
+      this.playSound('d_e2m6.mp3');
     });
 
     sprite.whenClicked(function () {
-      costume.addTo(sprite);
     });
 
-    sprite.whenKeyPressed(39, function () {
+    sprite.whenKeyPressed(39, function () { 
+      this.pointInDirection(90)
       this.changeX(100);
+      this.say("")
     });
 
     sprite.whenKeyPressed(37, function () {
+      this.pointInDirection(-90)
       this.changeX(-100);
     });
 
     sprite.whenKeyPressed(38, function () {
-      this.changeY(100);
+      if(this.y < stage.height/2-100){ 
+        this.changeY(100);  
+      } 
     });
 
     sprite.whenKeyPressed(40, function () {
-      this.changeY(-100);
+      if(this.y > (stage.height/2 * -1) + 100){
+        this.changeY(-100)
+      }
+      
     });
+    
+    let cacodemon =new blockLike.Sprite({
+      width:100,
+      height:100,
+      color:"black",
+      image:"cacodemon.jpg"
+
+    }) 
+    cacodemon.addTo(stage)
+
+    cacodemon.whenKeyPressed('w', function () {
+      this.changeY(100)
+    });
+    cacodemon.whenKeyPressed('s', function () {
+      this.changeY(-100)
+    });
+    cacodemon.whenKeyPressed('d', function () {
+      this.changeX(100)
+    });
+    cacodemon.whenKeyPressed('a', function () { 
+      this.changeX(-100)
+    });
+
+
   </script>
 </body>
 </html>
