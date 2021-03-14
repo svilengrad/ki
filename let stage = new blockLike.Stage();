@@ -1,0 +1,11 @@
+let stage = new blockLike.Stage();
+let sprite = new blockLike.Sprite();
+
+sprite.addTo(stage);
+sprite.whenClicked( function() {
+  this.playSound('../../sounds/bleat.wav');
+});
+
+stage.whenKeyPressed('Escape', () => {
+  this.stopSounds();
+});

@@ -37,37 +37,57 @@
       image:'doomguy side view.jpg'
     });
     
-
+    
     sprite.addTo(stage);
     sprite.setRotationStyle('left-right'); 
     sprite.pointInDirection(-90)
+    let doomguytopview =new blockLike.Costume({
+      height:100,
+      width:100,
+      image:"doomguy top view.jpg" 
+    });
+     sprite.addCostume(doomguytopview)
+
+     let doomguysideview =new blockLike.Costume({
+       height:100,
+       width:100,
+       image:"doomguy side view.jpg"
+     })
+     sprite.addCostume(doomguysideview)
+
+    let doogyt
     
 
     let answer;
     sprite.whenFlag(function () {
-      answer = this.ask('DO yyou WANT to KILLL?!?!?');
-      this.say('Then KILL OR BE KILLED ' + answer)
       this.playSound('d_e2m6.mp3');
     });
 
     sprite.whenClicked(function () {
     });
-
     sprite.whenKeyPressed(39, function () { 
       this.pointInDirection(90)
-      this.changeX(100);
+      if(this.x < stage.width/2-100){
+      this.changeX(100)
+      }
       this.say("")
+    
     });
 
     sprite.whenKeyPressed(37, function () {
+      this.switchCostumeTo(doomguysideview)
       this.pointInDirection(-90)
-      this.changeX(-100);
+      if(this.x > (stage.width/2 * -1) + 100){
+      this.changeX(-100)
+    }
+    
     });
 
     sprite.whenKeyPressed(38, function () {
-      if(this.y < stage.height/2-100){ 
+      this.switchCostumeTo(doomguytopview)
+      // if(this.y < stage.height/2-100){ 
         this.changeY(100);  
-      } 
+      // } 
     });
 
     sprite.whenKeyPressed(40, function () {
@@ -85,18 +105,63 @@
 
     }) 
     cacodemon.addTo(stage)
+    cacodemon.setRotationStyle('left-right'); 
+    cacodemon.pointInDirection(-90)
+    let cacodemonback =new blockLike.Costume({
+      height:100,
+      width:100,
+      image:"cacodemon back.jpg" 
+    });
+     cacodemon.addCostume(cacodemonback)
+
+     let cacodemonnew =new blockLike.Costume({
+       height:100,
+       width:100,
+       image:"cacodemon new.jpg"
+     })
+      cacodemon.addCostume(cacodemonnew)   
+      
+      let cacodemonleftview =new blockLike.Costume({
+        height:100,
+        width:100,
+        image:"cacodemon left view.jpg"
+      })
+      cacodemon.addCostume(cacodemonleftview)
+
+      let cacodemonrightside =new blockLike.Costume({
+        height:100,
+        width:100,
+        image:"cacodemon 3 right.jpg"
+      })
+      cacodemon.addCostume(cacodemonrightside)
+
+
 
     cacodemon.whenKeyPressed('w', function () {
-      this.changeY(100)
+      this.pointInDirection(90)
+      this.switchCostumeTo(cacodemonback)
+      if(this.y < stage.height/2-100){
+        this.changeY(100)
+      }
     });
     cacodemon.whenKeyPressed('s', function () {
-      this.changeY(-100)
+      this.pointInDirection(-90)
+      this.switchCostumeTo(cacodemonnew)
+      if(this.y > (stage.height/2 * -1) + 100){
+        this.changeY(-100)
+      }
     });
     cacodemon.whenKeyPressed('d', function () {
-      this.changeX(100)
+      this.switchCostumeTo(cacodemonleftview)
+      if(this.x < stage.width/2-100){
+        this.changeX(100)
+      }
     });
     cacodemon.whenKeyPressed('a', function () { 
-      this.changeX(-100)
+      this.switchCostumeTo(cacodemonrightside)
+      if(this.x > (stage.width/2 * -1) + 100){
+        this.changeX(-100)
+      }
     });
 
 
