@@ -44,7 +44,7 @@
     let doomguytopview =new blockLike.Costume({
       height:100,
       width:100,
-      image:"doomguy top view.jpg" 
+      image:"doomguy.jpg" 
     });
      sprite.addCostume(doomguytopview)
 
@@ -101,7 +101,7 @@
       width:100,
       height:100,
       color:"black",
-      image:"cacodemon.jpg"
+      image:""
 
     }) 
     cacodemon.addTo(stage)
@@ -124,14 +124,14 @@
       let cacodemonleftview =new blockLike.Costume({
         height:100,
         width:100,
-        image:"cacodemon left view.jpg"
+        image:"cacodemon right view.jpg"
       })
       cacodemon.addCostume(cacodemonleftview)
 
       let cacodemonrightside =new blockLike.Costume({
         height:100,
         width:100,
-        image:"cacodemon 3 right.jpg"
+        image:"cacodemon left view.jpg"
       })
       cacodemon.addCostume(cacodemonrightside)
 
@@ -152,17 +152,62 @@
       }
     });
     cacodemon.whenKeyPressed('d', function () {
-      this.switchCostumeTo(cacodemonleftview)
+      this.switchCostumeTo(cacodemonrightside)
       if(this.x < stage.width/2-100){
         this.changeX(100)
       }
     });
     cacodemon.whenKeyPressed('a', function () { 
-      this.switchCostumeTo(cacodemonrightside)
+      this.switchCostumeTo(cacodemonleftview)
       if(this.x > (stage.width/2 * -1) + 100){
         this.changeX(-100)
       }
     });
+
+    const DELAY = 5;
+
+    let gameover = new blockLike.Backdrop({
+      image: 'GameOver.png'
+    });
+    stage.addBackdrop(gameover);
+
+    function deleteSprite(sprite){
+      stage.removeSprite(sprite);
+    }
+
+    stage.whenFlag(function() { 
+        let i = 0;
+        while(true) {
+          stop;
+          stage.switchBackDropTo(GameOver.png);
+        }   
+        document.getElementByid('timer').innerHTML = i+1;
+        i++;
+        this.wait(1);   
+      
+    })
+
+    stage.whenFlag(function(){
+      this.playSoundUntilDone('')
+      let i = 0;
+      let delayStep = DELAY;
+      while(true){
+        stage.switchBackDropToNum(i);
+        if(i == 1){
+            i = 0;
+        }else{
+            i++;
+        }
+        this.wait(DELAY)
+        delayStep += DELAY;
+        if(delayStep == DELAY*3){
+            sprite.say("I Win!!!");
+            stop;
+        }
+      }
+    });
+
+
 
 
   </script>
