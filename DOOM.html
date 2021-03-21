@@ -30,12 +30,30 @@
   <script src="https://cdn.jsdelivr.net/npm/blocklike@1.0.0/dist/blocklike-1.0.0.min.js"></script>
   <script>
     let stage = new blockLike.Stage();
+    let gameover = new blockLike.Backdrop({
+      image: 'GameOver.png'
+    });
+    function isGameOver(sprite1,sprite2){
+      if(sprite1.isTouching(sprite2)){
+        console.log('touch')
+        stage.addBackdrop(gameover)
+        stage.switchBackdropTo(gameover)
+        
+      }
+    }
     let sprite = new blockLike.Sprite({
       width: 100,
       height: 100,
       color: 'black',
       image:'doomguy side view.jpg'
     });
+    let cacodemon =new blockLike.Sprite({
+      width:100,
+      height:100,
+      color:"black",
+      image:""
+
+    }) 
     
     
     sprite.addTo(stage);
@@ -60,7 +78,7 @@
 
     let answer;
     sprite.whenFlag(function () {
-      this.playSound('d_e2m6.mp3');
+      // this.playSound('d_e2m6.mp3');
     });
 
     sprite.whenClicked(function () {
@@ -69,6 +87,7 @@
       this.pointInDirection(90)
       if(this.x < stage.width/2-100){
       this.changeX(100)
+      isGameOver(sprite,cacodemon);
       }
       this.say("")
     
@@ -79,6 +98,7 @@
       this.pointInDirection(-90)
       if(this.x > (stage.width/2 * -1) + 100){
       this.changeX(-100)
+      isGameOver(sprite,cacodemon);
     }
     
     });
@@ -87,23 +107,19 @@
       this.switchCostumeTo(doomguytopview)
       // if(this.y < stage.height/2-100){ 
         this.changeY(100);  
+        isGameOver(sprite,cacodemon);
       // } 
     });
 
     sprite.whenKeyPressed(40, function () {
       if(this.y > (stage.height/2 * -1) + 100){
         this.changeY(-100)
+        isGameOver(sprite,cacodemon);
       }
       
     });
     
-    let cacodemon =new blockLike.Sprite({
-      width:100,
-      height:100,
-      color:"black",
-      image:""
 
-    }) 
     cacodemon.addTo(stage)
     cacodemon.setRotationStyle('left-right'); 
     cacodemon.pointInDirection(-90)
@@ -142,6 +158,7 @@
       this.switchCostumeTo(cacodemonback)
       if(this.y < stage.height/2-100){
         this.changeY(100)
+        isGameOver(sprite,cacodemon);
       }
     });
     cacodemon.whenKeyPressed('s', function () {
@@ -149,27 +166,25 @@
       this.switchCostumeTo(cacodemonnew)
       if(this.y > (stage.height/2 * -1) + 100){
         this.changeY(-100)
+        isGameOver(sprite,cacodemon);
       }
     });
     cacodemon.whenKeyPressed('d', function () {
       this.switchCostumeTo(cacodemonrightside)
       if(this.x < stage.width/2-100){
         this.changeX(100)
+        isGameOver(sprite,cacodemon);
       }
     });
     cacodemon.whenKeyPressed('a', function () { 
       this.switchCostumeTo(cacodemonleftview)
       if(this.x > (stage.width/2 * -1) + 100){
         this.changeX(-100)
+        isGameOver(sprite,cacodemon);
       }
     });
 
     const DELAY = 5;
-
-    let gameover = new blockLike.Backdrop({
-      image: 'GameOver.png'
-    });
-    stage.addBackdrop(gameover);
 
     function deleteSprite(sprite){
       stage.removeSprite(sprite);
@@ -177,35 +192,36 @@
 
     stage.whenFlag(function() { 
         let i = 0;
-        while(true) {
-          stop;
-          stage.switchBackDropTo(GameOver.png);
-        }   
-        document.getElementByid('timer').innerHTML = i+1;
+        // // while(true) {
+        //   stop;
+        //   stage.switchBackdropTo(gameover);
+        // }   
+        document.getElementById('timer').innerHTML = i+1;
         i++;
         this.wait(1);   
       
     })
 
-    stage.whenFlag(function(){
-      this.playSoundUntilDone('')
-      let i = 0;
-      let delayStep = DELAY;
-      while(true){
-        stage.switchBackDropToNum(i);
-        if(i == 1){
-            i = 0;
-        }else{
-            i++;
-        }
-        this.wait(DELAY)
-        delayStep += DELAY;
-        if(delayStep == DELAY*3){
-            sprite.say("I Win!!!");
-            stop;
-        }
-      }
-    });
+    // stage.whenFlag(function(){
+      
+    //   let i = 0;
+    //   let delayStep = DELAY;
+    //   while(true){
+    //     stage.switchBackdropToNum(i);
+    //     if(i == 1){
+    //         i = 0;
+    //     }else{
+    //         i++;
+    //     }
+    //     this.wait(DELAY)
+    //     delayStep += DELAY;
+    //     if(delayStep == DELAY*3){
+    //         sprite.say("I Win!!!");
+    //         stop;
+    //     }
+        
+    //   }
+    // });
 
 
 
